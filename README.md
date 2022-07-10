@@ -76,38 +76,30 @@ The use of the term `n-1` is commonly referred to as Bessel's correction. Note, 
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/stats-base-variancetk
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm` branch][esm-url].
+-   If you are using Deno, visit the [`deno` branch][deno-url].
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd` branch][umd-url].
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-variancetk = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-variancetk@umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var variancetk = require( 'path/to/vendor/umd/stats-base-variancetk/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-variancetk@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.variancetk;
-})();
-</script>
+var variancetk = require( '@stdlib/stats-base-variancetk' );
 ```
 
 #### variancetk( N, correction, x, stride )
@@ -207,16 +199,11 @@ var v = variancetk.ndarray( N, 1, x, 2, 1 );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-base-randu@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-round@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-variancetk@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var randu = require( '@stdlib/random-base-randu' );
+var round = require( '@stdlib/math-base-special-round' );
+var Float64Array = require( '@stdlib/array-float64' );
+var variancetk = require( '@stdlib/stats-base-variancetk' );
 
 var x;
 var i;
@@ -229,11 +216,6 @@ console.log( x );
 
 var v = variancetk( x.length, 1, x, 1 );
 console.log( v );
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -308,8 +290,8 @@ Copyright &copy; 2016-2022. The Stdlib [Authors][stdlib-authors].
 [npm-image]: http://img.shields.io/npm/v/@stdlib/stats-base-variancetk.svg
 [npm-url]: https://npmjs.org/package/@stdlib/stats-base-variancetk
 
-[test-image]: https://github.com/stdlib-js/stats-base-variancetk/actions/workflows/test.yml/badge.svg?branch=v0.0.8
-[test-url]: https://github.com/stdlib-js/stats-base-variancetk/actions/workflows/test.yml?query=branch:v0.0.8
+[test-image]: https://github.com/stdlib-js/stats-base-variancetk/actions/workflows/test.yml/badge.svg?branch=v0.0.10
+[test-url]: https://github.com/stdlib-js/stats-base-variancetk/actions/workflows/test.yml?query=branch:v0.0.10
 
 [coverage-image]: https://img.shields.io/codecov/c/github/stdlib-js/stats-base-variancetk/main.svg
 [coverage-url]: https://codecov.io/github/stdlib-js/stats-base-variancetk?branch=main
@@ -344,19 +326,19 @@ Copyright &copy; 2016-2022. The Stdlib [Authors][stdlib-authors].
 
 [mdn-typed-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
 
-[@stdlib/stats/base/svariancetk]: https://github.com/stdlib-js/stats-base-svariancetk/tree/umd
+[@stdlib/stats/base/svariancetk]: https://github.com/stdlib-js/stats-base-svariancetk
 
 [@ling:1974a]: https://doi.org/10.2307/2286154
 
 <!-- <related-links> -->
 
-[@stdlib/stats/base/dvariancetk]: https://github.com/stdlib-js/stats-base-dvariancetk/tree/umd
+[@stdlib/stats/base/dvariancetk]: https://github.com/stdlib-js/stats-base-dvariancetk
 
-[@stdlib/stats/base/nanvariancetk]: https://github.com/stdlib-js/stats-base-nanvariancetk/tree/umd
+[@stdlib/stats/base/nanvariancetk]: https://github.com/stdlib-js/stats-base-nanvariancetk
 
-[@stdlib/stats/base/stdevtk]: https://github.com/stdlib-js/stats-base-stdevtk/tree/umd
+[@stdlib/stats/base/stdevtk]: https://github.com/stdlib-js/stats-base-stdevtk
 
-[@stdlib/stats/base/variance]: https://github.com/stdlib-js/stats-base-variance/tree/umd
+[@stdlib/stats/base/variance]: https://github.com/stdlib-js/stats-base-variance
 
 <!-- </related-links> -->
 
