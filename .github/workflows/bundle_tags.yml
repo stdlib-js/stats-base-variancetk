@@ -67,7 +67,7 @@ jobs:
         uses: lewagon/wait-on-check-action@v1.0.0
         with:
           ref: main
-          check-name: 'Productionize status'
+          running-workflow-name: 'Create bundle tags'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 60
           allowed-conclusions: success
@@ -88,15 +88,37 @@ jobs:
         run: |
           SLUG=${{ github.repository }}
           VERSION=$(echo ${{ github.ref }} | sed -E -n 's/refs\/tags\/?(v[0-9]+.[0-9]+.[0-9]+).*/\1/p')
+          ESCAPED=$(echo $SLUG | sed -E 's/\//\\\//g')
 
           git checkout -b deno origin/deno
+          sed -i -E "s/$ESCAPED@deno/$ESCAPED@$VERSION-deno/g" README.md
+          git add README.md
+          git commit -m "Update README.md for Deno bundle $VERSION"
           git tag -a $VERSION-deno -m "$VERSION-deno"
           git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$SLUG.git" $VERSION-deno
+          git reset HEAD~1
+          git add README.md
+          git commit -m "Revert changes to README.md for Deno bundle $VERSION"
+          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$SLUG.git" deno
 
           git checkout -b umd origin/umd
+          sed -i -E "s/$ESCAPED@umd/$ESCAPED@$VERSION-umd/g" README.md
+          git add README.md
+          git commit -m "Update README.md for UMD bundle $VERSION"
           git tag -a $VERSION-umd -m "$VERSION-umd"
           git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$SLUG.git" $VERSION-umd
+          git reset HEAD~1
+          git add README.md
+          git commit -m "Revert changes to README.md for UMD bundle $VERSION"
+          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$SLUG.git" umd
 
           git checkout -b esm origin/esm
+          sed -i -E "s/$ESCAPED@esm/$ESCAPED@$VERSION-esm/g" README.md
+          git add README.md
+          git commit -m "Update README.md for ESM bundle $VERSION"
           git tag -a $VERSION-esm -m "$VERSION-esm"
           git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$SLUG.git" $VERSION-esm
+          git reset HEAD~1
+          git add README.md
+          git commit -m "Revert changes to README.md for ESM bundle $VERSION"
+          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$SLUG.git" esm
